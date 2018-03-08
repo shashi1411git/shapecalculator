@@ -1,0 +1,9 @@
+#shapecalculator_image {
+    background-image: url(header_bg.gif);
+    background-repeat: round;
+    height: 60px;
+}
+.align {
+    padding-left: 30px;
+    padding-top: 15px;
+}

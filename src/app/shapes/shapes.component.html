@@ -1,0 +1,74 @@
+<form #shapeForm="ngForm" (ngSubmit)="submitShape(shapeForm)" *ngIf="showShapes">
+  <div class="form-group shapeborder">
+    <h5 style="text-align: center">Step 1 : Select your shape</h5>
+    <p>Please select the shape that you would like to calculate the area of and press the button "Go to step 2"</p>
+    <div class="radio" *ngFor="let shape of shapes">
+      <label>
+        <input ngModel type="radio" name="shape" [value]="shape.id"> {{shape.name}}
+      </label>
+    </div>
+    <br>
+    <button [disabled]="!shapeForm.dirty">Go to step 2</button>
+    <a class="linkPadding" href="">or Cancel</a>
+  </div>
+</form>
+
+<form #dimForm="ngForm" (ngSubmit)="submitDimensions(dimForm)" *ngIf="showDimensions">
+  <div class="form-group shapeborder">
+    <h5 style="text-align: center">Step 2 : Insert your values</h5>
+    <p>You have selected a {{selectedShape}}, please input the required variables.</p>
+    <div *ngIf="selectedShape === 'rectangle'">
+      Width: <input ngModel required type="text" #rectWidth="ngModel" class="form-control" id="rectWidth" name="rectWidth" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="rectWidth.touched && !rectWidth.valid">
+        <div *ngIf="rectWidth.errors.required">Width is required</div>
+        <div *ngIf="rectWidth.errors.pattern">Width should contain numbers</div>
+      </div><br>
+      Length: <input ngModel required type="text" #rectLength="ngModel" class="form-control" id="rectLength" name="rectLength" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="rectLength.touched && !rectLength.valid">
+        <div *ngIf="rectLength.errors.required">Length is required</div>
+        <div *ngIf="rectLength.errors.pattern">Length should contain numbers</div>
+      </div>
+    </div>
+    <div *ngIf="selectedShape === 'circle'">
+      Diameter: <input ngModel required #diameter="ngModel" type="text" class="form-control" id="diameter" name="diameter" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="diameter.touched && !diameter.valid">
+        <div *ngIf="diameter.errors.required">Diameter is required</div>
+        <div *ngIf="diameter.errors.pattern">Diameter should contain numbers</div>
+      </div>
+    </div>
+    <div *ngIf="selectedShape === 'square'">
+      Length: <input ngModel required #sqrLength="ngModel" type="text" class="form-control" id="sqrLength" name="sqrLength" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="sqrLength.touched && !sqrLength.valid">
+        <div *ngIf="sqrLength.errors.required">Length is required</div>
+        <div *ngIf="sqrLength.errors.pattern">Length should contain numbers</div>
+      </div>
+    </div>
+    <div *ngIf="selectedShape === 'eclipse'">
+      Width: <input ngModel #eclWidth="ngModel" required type="text" class="form-control" id="eclWidth" name="eclWidth" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="eclWidth.touched && !eclWidth.valid">
+        <div *ngIf="eclWidth.errors.required">Width is required</div>
+        <div *ngIf="eclWidth.errors.pattern">Width should contain numbers</div>
+      </div><br>
+      Height: <input ngModel #eclHeight="ngModel" required type="text" class="form-control" id="eclHeight" name="eclHeight" pattern="^\d+(?:\.\d{1,2})?$"/>
+      <div class="alert-danger" *ngIf="eclHeight.touched && !eclHeight.valid">
+        <div *ngIf="eclHeight.errors.required">Height is required</div>
+        <div *ngIf="eclHeight.errors.pattern">Height should contain numbers</div>
+      </div>
+    </div>
+    <br>
+    <button class="step2ButtonMargin" [disabled]="!dimForm.valid">Go to step 3</button>
+    <a class="linkPadding" href="">or Cancel</a>
+  </div>
+</form>
+
+<form #areaForm="ngForm" (ngSubmit)="startOver()" *ngIf="showArea">
+  <div class="form-group shapeborder">
+    <h5 style="text-align: center">Step 3 : Your results</h5>
+    <p>You have calculated the area of a {{selectedShape}}, with a {{ dimensions }}. Below is your result:</p>
+    <div class="areaAlign">
+      The Area is {{area | number:'1.2-2'}}
+    </div>
+    <br>
+    <button class="step3ButtonMargin">Start over</button>
+  </div>
+</form>

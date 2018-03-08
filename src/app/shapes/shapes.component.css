@@ -1,0 +1,24 @@
+.shapeborder {
+    border-style: solid; 
+    border-color: gray;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 10px 15px 15px 15px;
+    min-height: 330px;
+}
+
+.areaAlign {
+    text-align: center;
+}
+
+.linkPadding {
+    padding-left: 10px;
+}
+
+.step2ButtonMargin {
+    margin-bottom: 15px;
+}
+
+.step3ButtonMargin {
+    margin-bottom: 15px;
+}
